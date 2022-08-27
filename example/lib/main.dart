@@ -101,6 +101,8 @@ class _SidebarPageState extends State<SidebarPage> {
     var size = MediaQuery.of(context).size;
     return SafeArea(
       child: CollapsibleSidebar(
+        avatarSize: 50,
+        topPadding: 5,
         isCollapsed: MediaQuery.of(context).size.width <= 800,
         items: _items,
         avatarImg: _avatarImg,
