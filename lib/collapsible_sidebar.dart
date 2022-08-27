@@ -210,91 +210,94 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topLeft,
+    print(Localizations.localeOf(context).toString());
+    return Row(
+      //alignment: Alignment.topLeft,
       children: [
-        Padding(
-          padding: EdgeInsets.only(left: widget.minWidth * 1.1),
-          child: widget.body,
-        ),
         Padding(
           padding: EdgeInsets.all(widget.screenPadding),
           child: GestureDetector(
             onHorizontalDragUpdate: _onHorizontalDragUpdate,
             onHorizontalDragEnd: _onHorizontalDragEnd,
-            child: CollapsibleContainer(
-              height: widget.height,
-              width: _currWidth,
-              padding: widget.padding,
-              borderRadius: widget.borderRadius,
-              color: widget.backgroundColor,
-              sidebarBoxShadow: widget.sidebarBoxShadow,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: CollapsibleAvatar(
-                      backgroundColor: widget.unselectedIconColor,
-                      avatarSize: widget.avatarSize,
-                      name: widget.title,
-                      avatarImg: widget.avatarImg,
-                      textStyle:
-                          _textStyle(widget.backgroundColor, widget.titleStyle),
-                    ),
-                  ),
-                  SizedBox(
-                    height: widget.topPadding,
-                  ),
-                  Center(
-                    child: SizedBox(
-                        width: widget.avatarSize,
-                        child: Divider(color: widget.unselectedIconColor)),
-                  ),
-                  SizedBox(
-                    height: widget.topPadding,
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      reverse: widget.fitItemsToBottom,
-                      child: Stack(
-                        children: [
-                          CollapsibleItemSelection(
-                            height: _maxOffsetY,
-                            offsetY: _maxOffsetY * _selectedItemIndex,
-                            color: widget.selectedIconBox,
-                            duration: widget.duration,
-                            curve: widget.curve,
-                          ),
-                          Column(
-                            children: _items,
-                          ),
-                        ],
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+              child: CollapsibleContainer(
+                height: widget.height,
+                width: _currWidth,
+                padding: widget.padding,
+                borderRadius: widget.borderRadius,
+                color: widget.backgroundColor,
+                sidebarBoxShadow: widget.sidebarBoxShadow,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: CollapsibleAvatar(
+                        backgroundColor: widget.unselectedIconColor,
+                        avatarSize: widget.avatarSize,
+                        name: widget.title,
+                        avatarImg: widget.avatarImg,
+                        textStyle: _textStyle(
+                            widget.backgroundColor, widget.titleStyle),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: widget.bottomPadding,
-                  ),
-                  widget.showToggleButton
-                      ? Divider(
-                          color: widget.unselectedIconColor,
-                          indent: 5,
-                          endIndent: 5,
-                          thickness: 1,
-                        )
-                      : SizedBox(
-                          height: 5,
+                    SizedBox(
+                      height: widget.topPadding,
+                    ),
+                    Center(
+                      child: SizedBox(
+                          width: widget.avatarSize,
+                          child: Divider(color: widget.unselectedIconColor)),
+                    ),
+                    SizedBox(
+                      height: widget.topPadding,
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
+                        reverse: widget.fitItemsToBottom,
+                        child: Stack(
+                          children: [
+                            CollapsibleItemSelection(
+                              height: _maxOffsetY,
+                              offsetY: _maxOffsetY * _selectedItemIndex,
+                              color: widget.selectedIconBox,
+                              duration: widget.duration,
+                              curve: widget.curve,
+                            ),
+                            Column(
+                              children: _items,
+                            ),
+                          ],
                         ),
-                  widget.showToggleButton
-                      ? _toggleButton
-                      : SizedBox(
-                          height: widget.iconSize,
-                        ),
-                ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: widget.bottomPadding,
+                    ),
+                    widget.showToggleButton
+                        ? Divider(
+                            color: widget.unselectedIconColor,
+                            indent: 5,
+                            endIndent: 5,
+                            thickness: 1,
+                          )
+                        : SizedBox(
+                            height: 5,
+                          ),
+                    widget.showToggleButton
+                        ? _toggleButton
+                        : SizedBox(
+                            height: widget.iconSize,
+                          ),
+                  ],
+                ),
               ),
             ),
           ),
+        ),
+        Expanded(
+          child: widget.body,
         ),
       ],
     );

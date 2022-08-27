@@ -28,6 +28,7 @@ class _CollapsibleItemWidgetState extends State<CollapsibleItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Locale currentLocale = Localizations.localeOf(context);
     return MouseRegion(
       onEnter: (event) {
         setState(() {
@@ -46,10 +47,12 @@ class _CollapsibleItemWidgetState extends State<CollapsibleItemWidget> {
           color: Colors.transparent,
           padding: EdgeInsets.all(widget.padding),
           child: Stack(
-            alignment: Alignment.centerLeft,
+            alignment: currentLocale != Locale("ar")
+                ? Alignment.centerLeft
+                : Alignment.centerRight,
             children: [
               widget.leading,
-              _title,
+              _title(context),
             ],
           ),
         ),
@@ -57,11 +60,14 @@ class _CollapsibleItemWidgetState extends State<CollapsibleItemWidget> {
     );
   }
 
-  Widget get _title {
+  Widget _title(BuildContext context) {
+    Locale currentLocale = Localizations.localeOf(context);
     return Opacity(
       opacity: widget.scale,
       child: Transform.translate(
-        offset: Offset(widget.offsetX, 0),
+        offset: Offset(
+            currentLocale != Locale("ar") ? widget.offsetX : -widget.offsetX,
+            0),
         child: Transform.scale(
           scale: widget.scale,
           child: SizedBox(
