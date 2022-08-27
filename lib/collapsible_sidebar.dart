@@ -230,7 +230,14 @@ class _CollapsibleSidebarState extends State<CollapsibleSidebar>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _avatar,
+                  CollapsibleAvatar(
+                    backgroundColor: widget.unselectedIconColor,
+                    avatarSize: widget.iconSize,
+                    name: widget.title,
+                    avatarImg: widget.avatarImg,
+                    textStyle:
+                        _textStyle(widget.backgroundColor, widget.titleStyle),
+                  ),
                   SizedBox(
                     height: widget.topPadding,
                   ),

@@ -20,23 +20,20 @@ class CollapsibleAvatar extends StatelessWidget {
     return Container(
       height: avatarSize,
       width: avatarSize,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(avatarSize),
-        color: backgroundColor,
-      ),
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.circular(avatarSize),
+      // ),
       child: avatarImg != null ? _avatar : _initials,
     );
   }
 
   Widget get _avatar {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(avatarSize),
-        child: Image(
-          image: avatarImg,
-          fit: BoxFit.fill,
-          height: avatarSize,
-          width: avatarSize,
-        ));
+    return Image(
+      image: avatarImg,
+      fit: BoxFit.fill,
+      height: avatarSize,
+      width: avatarSize,
+    );
   }
 
   Widget get _initials {
