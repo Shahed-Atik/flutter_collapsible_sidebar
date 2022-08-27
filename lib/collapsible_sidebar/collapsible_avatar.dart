@@ -30,7 +30,7 @@ class CollapsibleAvatar extends StatelessWidget {
   Widget get _avatar {
     return Image(
       image: avatarImg,
-      fit: BoxFit.fill,
+      fit: BoxFit.contain,
       height: avatarSize,
       width: avatarSize,
     );
